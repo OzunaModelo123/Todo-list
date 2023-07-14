@@ -27,5 +27,19 @@ class MainActivity : AppCompatActivity() {
 
         // Set the choice mode of the ListView to allow multiple item selection
         binding.listView.choiceMode = ListView.CHOICE_MODE_MULTIPLE
+
+        // Add click listener for the "Add" button
+        binding.addButton.setOnClickListener {
+            // Get the text from the EditText
+            val newItem = binding.editText.text.toString()
+            if (newItem.isNotEmpty()) {
+                // Add the new item to the list and notify the adapter
+                items.add(newItem)
+                adapter.notifyDataSetChanged()
+
+                // Clear the EditText
+                binding.editText.text.clear()
+            }
+        }
     }
 }
