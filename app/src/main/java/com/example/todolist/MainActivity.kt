@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.CheckBox
+import android.widget.CheckedTextView
 import android.widget.ListView
 import com.example.todolist.databinding.ActivityMainBinding
 
@@ -48,14 +48,17 @@ class MainActivity : AppCompatActivity() {
         // Add item click listener to toggle the checked state of the checkbox
         binding.listView.onItemClickListener =
             AdapterView.OnItemClickListener { _, view, _, _ ->
-                val checkBox = view.findViewById<CheckBox>(android.R.id.checkbox)
+                val checkBox = view.findViewById<CheckedTextView>(android.R.id.text1)
                 checkBox.isChecked = !checkBox.isChecked
+
             }
         // Add item long click listener to remove the item from the list
         binding.listView.setOnItemLongClickListener { _, _, position, _ ->
-            items.removeAt(position)
+            val selectedItem = items[position]
+            items.remove(selectedItem)
             adapter.notifyDataSetChanged()
             true
         }
-        }
     }
+}
+
